@@ -30,5 +30,9 @@
         android:id="@+id/createArticleFragment"
         android:name="com.example.thegadgetapp.createarticle.CreateArticleFragment"
         android:label="fragment_create_article"
-        tools:layout="@layout/fragment_create_article" />
+        tools:layout="@layout/fragment_create_article">
+        <action
+            android:id="@+id/action_createArticleFragment_to_newsFeedFragment"
+            app:popUpTo="@id/newsFeedFragment"/>
+    </fragment>
 </navigation>
