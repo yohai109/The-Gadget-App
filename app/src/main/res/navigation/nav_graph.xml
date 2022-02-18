@@ -9,5 +9,18 @@
         android:id="@+id/loginFragment"
         android:name="com.example.thegadgetapp.login.LoginFragment"
         android:label="fragment_login"
-        tools:layout="@layout/fragment_login" />
+        tools:layout="@layout/fragment_login">
+        <action
+            android:id="@+id/action_loginFragment_to_newsFeedFragment"
+            app:destination="@id/newsFeedFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/newsFeedFragment"
+        android:name="com.example.thegadgetapp.newsfeed.NewsFeedFragment"
+        android:label="fragment_news_feed"
+        tools:layout="@layout/fragment_news_feed" >
+        <argument
+            app:argType="string"
+            android:name="userId" />
+    </fragment>
 </navigation>

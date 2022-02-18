@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.thegadgetapp.activity.ActivityViewModel;
 import com.example.thegadgetapp.database.FirebaseRepository;
 import com.example.thegadgetapp.database.GadgetDatabase;
 import com.example.thegadgetapp.login.LoginViewModel;

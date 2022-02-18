@@ -1,4 +1,4 @@
-package com.example.thegadgetapp;
+package com.example.thegadgetapp.activity;
 
 import androidx.lifecycle.ViewModel;
 

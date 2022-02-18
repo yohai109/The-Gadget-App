@@ -1,9 +1,13 @@
-package com.example.thegadgetapp;
+package com.example.thegadgetapp.activity;
 
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
+
+import com.example.thegadgetapp.MainApplication;
+import com.example.thegadgetapp.R;
+import com.example.thegadgetapp.ViewModelFactory;
 
 public class MainActivity extends AppCompatActivity {
     ActivityViewModel viewModel;
