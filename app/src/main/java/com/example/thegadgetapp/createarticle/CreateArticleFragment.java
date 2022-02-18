@@ -1,11 +1,18 @@
 package com.example.thegadgetapp.createarticle;
 
+import static android.app.Activity.RESULT_OK;
+
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -17,15 +24,20 @@ import com.example.thegadgetapp.ViewModelFactory;
 import com.example.thegadgetapp.activity.MainActivity;
 import com.example.thegadgetapp.database.entities.Article;
 
+import java.io.IOException;
 import java.util.UUID;
 
 
 public class CreateArticleFragment extends Fragment {
-    EditText headerEdittext;
-    EditText secondaryHeaderEdittext;
-    EditText bodyEdittext;
-    Button saveButton;
-    CreateArticleViewModel viewModel;
+    private EditText headerEdittext;
+    private EditText secondaryHeaderEdittext;
+    private EditText bodyEdittext;
+    private Button saveButton;
+    private ImageView imagePreview;
+    private CreateArticleViewModel viewModel;
+    private Uri uploadedImageUri;
+
+    int SELECT_PICTURE = 200;
 
     public CreateArticleFragment() {
     }
@@ -49,10 +61,51 @@ public class CreateArticleFragment extends Fragment {
         initViews(view);
         initViewModel();
         setSaveClick();
+
+        view.findViewById(R.id.upload_image_button).setOnClickListener(v -> {
+            Intent i = new Intent();
+            i.setType("image/*");
+            i.setAction(Intent.ACTION_GET_CONTENT);
+
+            // pass the constant to compare it
+            // with the returned requestCode
+            startActivityForResult(Intent.createChooser(i, "Select Picture"), SELECT_PICTURE);
+        });
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == RESULT_OK) {
+
+            // compare the resultCode with the
+            // SELECT_PICTURE constant
+            if (requestCode == SELECT_PICTURE) {
+                // Get the url of the image from data
+                Uri selectedImageUri = data.getData();
+                if (selectedImageUri != null) {
+                    uploadedImageUri = selectedImageUri;
+                    try {
+                        // Setting image on image view using Bitmap
+                        Bitmap bitmap = MediaStore
+                                .Images
+                                .Media
+                                .getBitmap(
+                                        requireActivity().getContentResolver(),
+                                        selectedImageUri);
+                        imagePreview.setImageBitmap(bitmap);
+                    } catch (IOException e) {
+                        // Log the exception
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
     }
 
     private void initViewModel() {
-        ViewModelFactory factory = ((MainActivity)requireActivity()).getFactory();
+        ViewModelFactory factory = ((MainActivity) requireActivity()).getFactory();
         viewModel = new ViewModelProvider(this, factory).get(CreateArticleViewModel.class);
     }
 
@@ -61,6 +114,7 @@ public class CreateArticleFragment extends Fragment {
         secondaryHeaderEdittext = view.findViewById(R.id.secondary_header_edittext);
         bodyEdittext = view.findViewById(R.id.body_edittext);
         saveButton = view.findViewById(R.id.save_button);
+        imagePreview = view.findViewById(R.id.image_preview);
     }
 
     private void setSaveClick() {
