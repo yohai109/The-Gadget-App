@@ -22,5 +22,13 @@
         <argument
             app:argType="string"
             android:name="userId" />
+        <action
+            android:id="@+id/action_newsFeedFragment_to_createArticleFragment"
+            app:destination="@id/createArticleFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/createArticleFragment"
+        android:name="com.example.thegadgetapp.createarticle.CreateArticleFragment"
+        android:label="fragment_create_article"
+        tools:layout="@layout/fragment_create_article" />
 </navigation>

@@ -33,10 +33,11 @@ public class NewsFeedAdapter extends RecyclerView.Adapter<NewsViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull NewsViewHolder holder, int position) {
-        holder.bind();
+        holder.bind(data.get(position));
     }
 
     public void setData(List<Article> newData) {
         data = newData;
+        notifyDataSetChanged();
     }
 }

@@ -51,7 +51,6 @@ public class LoginFragment extends Fragment {
         loginBtn = view.findViewById(R.id.login_button);
         loginBtn.setOnClickListener(v -> {
             viewModel.tryLogin("yohai", "123", (isSuccess, user) -> {
-                Log.d("login", "tried to login " + isSuccess);
                 if (isSuccess) {
                     mainThread.post(() -> {
                         Navigation.findNavController(v).navigate(
