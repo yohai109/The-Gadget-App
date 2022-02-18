@@ -8,6 +8,7 @@ import com.example.thegadgetapp.activity.ActivityViewModel;
 import com.example.thegadgetapp.database.FirebaseRepository;
 import com.example.thegadgetapp.database.GadgetDatabase;
 import com.example.thegadgetapp.login.LoginViewModel;
+import com.example.thegadgetapp.newsfeed.NewsFeedViewModel;
 
 public class ViewModelFactory implements ViewModelProvider.Factory {
     private FirebaseRepository firebaseRepository;
@@ -26,6 +27,8 @@ public class ViewModelFactory implements ViewModelProvider.Factory {
             return (T) new LoginViewModel(gadgetDatabase, firebaseRepository);
         } else if (modelClass.equals(ActivityViewModel.class)) {
             return (T) new ActivityViewModel(gadgetDatabase, firebaseRepository);
+        } else if (modelClass.equals(NewsFeedViewModel.class)) {
+            return (T) new NewsFeedViewModel(gadgetDatabase, firebaseRepository);
         }
         return null;
     }

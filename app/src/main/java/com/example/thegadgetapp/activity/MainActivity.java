@@ -20,4 +20,8 @@ public class MainActivity extends AppCompatActivity {
         viewModel = new ViewModelProvider(this, factory).get(ActivityViewModel.class);
         viewModel.initDB();
     }
+
+    public ViewModelFactory getFactory() {
+        return ((MainApplication) getApplication()).getFactory();
+    }
 }

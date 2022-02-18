@@ -19,6 +19,7 @@ import androidx.navigation.Navigation;
 import com.example.thegadgetapp.MainApplication;
 import com.example.thegadgetapp.R;
 import com.example.thegadgetapp.ViewModelFactory;
+import com.example.thegadgetapp.activity.MainActivity;
 
 public class LoginFragment extends Fragment {
     LoginViewModel viewModel;
@@ -44,7 +45,7 @@ public class LoginFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        ViewModelFactory factory = ((MainApplication) requireActivity().getApplication()).getFactory();
+        ViewModelFactory factory = ((MainActivity) requireActivity()).getFactory();
         viewModel = new ViewModelProvider(this, factory).get(LoginViewModel.class);
 
         loginBtn = view.findViewById(R.id.login_button);

@@ -3,6 +3,7 @@ package com.example.thegadgetapp.database;
 import androidx.room.Database;
 import androidx.room.RoomDatabase;
 
+import com.example.thegadgetapp.database.daos.ArticleDao;
 import com.example.thegadgetapp.database.daos.UserDao;
 import com.example.thegadgetapp.database.entities.User;
 
@@ -12,4 +13,6 @@ import com.example.thegadgetapp.database.entities.User;
 )
 public abstract class GadgetDatabase extends RoomDatabase {
     public abstract UserDao userDao();
+
+    public abstract ArticleDao articleDao();
 }
