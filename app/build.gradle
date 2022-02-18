@@ -2,6 +2,7 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'androidx.navigation.safeargs'
+    id 'com.google.gms.google-services'
 }
 
 android {
@@ -35,11 +36,16 @@ android {
 dependencies {
     //Room
     implementation "androidx.room:room-runtime:2.4.1"
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     annotationProcessor "androidx.room:room-compiler:2.4.1"
 
     // Navigation
-    implementation "androidx.navigation:navigation-fragment:2.3.5"
-    implementation "androidx.navigation:navigation-ui:2.3.5"
+    implementation "androidx.navigation:navigation-fragment:2.4.1"
+    implementation "androidx.navigation:navigation-ui:2.4.1"
+
+    // Firebase
+    implementation platform('com.google.firebase:firebase-bom:29.1.0')
+    implementation 'com.google.firebase:firebase-firestore'
 
 
     // Basic Android

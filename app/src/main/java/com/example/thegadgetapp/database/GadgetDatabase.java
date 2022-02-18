@@ -3,9 +3,13 @@ package com.example.thegadgetapp.database;
 import androidx.room.Database;
 import androidx.room.RoomDatabase;
 
+import com.example.thegadgetapp.database.daos.UserDao;
+import com.example.thegadgetapp.database.entities.User;
+
 @Database(
         version = 1,
-        entities = {}
+        entities = {User.class}
 )
 public abstract class GadgetDatabase extends RoomDatabase {
+    public abstract UserDao userDao();
 }
