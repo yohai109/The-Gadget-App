@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -14,6 +15,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.thegadgetapp.R;
 import com.example.thegadgetapp.ViewModelFactory;
 import com.example.thegadgetapp.activity.MainActivity;
+import com.squareup.picasso.Picasso;
 
 public class ArticleDetailsFragment extends Fragment {
 
@@ -23,6 +25,7 @@ public class ArticleDetailsFragment extends Fragment {
     TextView titleTextView;
     TextView secondaryHeaderTextView;
     TextView bodyTextView;
+    private ImageView imageView;
 
     public ArticleDetailsFragment() {
     }
@@ -42,6 +45,7 @@ public class ArticleDetailsFragment extends Fragment {
         titleTextView = view.findViewById(R.id.title_text);
         secondaryHeaderTextView = view.findViewById(R.id.secondary_header_text);
         bodyTextView = view.findViewById(R.id.body_tex);
+        imageView = view.findViewById(R.id.image_imageview);
 
         ViewModelFactory factory = ((MainActivity) requireActivity()).getFactory();
         viewModel = new ViewModelProvider(this, factory).get(DetailsViewModel.class);
@@ -50,6 +54,9 @@ public class ArticleDetailsFragment extends Fragment {
                 titleTextView.setText(article.header);
                 secondaryHeaderTextView.setText(article.secondaryHeader);
                 bodyTextView.setText(article.body);
+                Picasso.get()
+                        .load(article.imageUri)
+                        .into(imageView);
             }
         });
     }
