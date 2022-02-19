@@ -50,12 +50,18 @@ public class NewsFeedFragment extends Fragment {
         initRefresh();
         initAdapter();
         observeDB();
+
+        viewModel.refreshFromRemote();
     }
 
     private void findViews(View view) {
         swipeRefreshLayout = view.findViewById(R.id.swipe_layout);
         newsFeed = view.findViewById(R.id.news_feed_recycler);
-        adapter = new NewsFeedAdapter();
+        adapter = new NewsFeedAdapter((itemView, article) -> {
+            Navigation.findNavController(itemView).navigate(
+                    NewsFeedFragmentDirections.actionNewsFeedFragmentToArticleDetailsFragment(article.id)
+            );
+        });
         fab = view.findViewById(R.id.news_feed_fab);
     }
 

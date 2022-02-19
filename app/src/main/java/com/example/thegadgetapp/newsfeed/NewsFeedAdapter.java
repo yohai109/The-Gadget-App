@@ -14,13 +14,18 @@ import java.util.List;
 
 public class NewsFeedAdapter extends RecyclerView.Adapter<NewsViewHolder> {
 
+    private final NewsViewHolder.ViewHolderOnClickListener clickListener;
     private List<Article> data = null;
+
+    public NewsFeedAdapter(NewsViewHolder.ViewHolderOnClickListener clickListener) {
+        this.clickListener = clickListener;
+    }
 
     @NonNull
     @Override
     public NewsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.news_list_item, parent, false);
-        return new NewsViewHolder(view);
+        return new NewsViewHolder(view, clickListener);
     }
 
     @Override
