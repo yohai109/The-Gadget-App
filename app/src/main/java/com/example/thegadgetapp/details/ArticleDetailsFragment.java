@@ -11,10 +11,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 
 import com.example.thegadgetapp.R;
 import com.example.thegadgetapp.ViewModelFactory;
 import com.example.thegadgetapp.activity.MainActivity;
+import com.example.thegadgetapp.login.LoginFragmentDirections;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.squareup.picasso.Picasso;
 
@@ -51,6 +53,7 @@ public class ArticleDetailsFragment extends Fragment {
         imageView = view.findViewById(R.id.image_imageview);
         fab = view.findViewById(R.id.edit_article_fab);
 
+
         ViewModelFactory factory = ((MainActivity) requireActivity()).getFactory();
         viewModel = new ViewModelProvider(this, factory).get(DetailsViewModel.class);
         currUserId = viewModel.getCurrUserId();
@@ -69,6 +72,12 @@ public class ArticleDetailsFragment extends Fragment {
                     fab.show();
                 }
             }
+        });
+        fab.setOnClickListener(v -> {
+            Navigation.findNavController(v).navigate(
+                    ArticleDetailsFragmentDirections.
+                            actionArticleDetailsFragmentToArticleEditFragment(articleID)
+            );
         });
     }
 }
