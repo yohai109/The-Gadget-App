@@ -40,7 +40,6 @@ public class EditArticleFragment extends Fragment {
     private Button saveButton;
     private ImageView imagePreview;
     private ProgressBar loadingView;
-    private FloatingActionButton fab;
 
     private String articleId;
 
@@ -48,7 +47,6 @@ public class EditArticleFragment extends Fragment {
     private Uri uploadedImageUri;
 
     int SELECT_PICTURE = 200;
-    private Article currArticle;
 
     public EditArticleFragment() {
     }
@@ -67,11 +65,10 @@ public class EditArticleFragment extends Fragment {
         initViewModel();
         setSaveClick();
 
-        String index = EditArticleFragmentArgs.fromBundle(getArguments()).getArticleId();
+        articleId = EditArticleFragmentArgs.fromBundle(getArguments()).getArticleId();
 
         viewModel.getArticle(articleId).observe(getViewLifecycleOwner(), article -> {
             if (article != null ) {
-                currArticle = article;
                 titleEditTextView.setText(article.header);
                 secondaryHeaderEditTextView.setText(article.secondaryHeader);
                 bodyEditTextView.setText(article.body);
@@ -126,12 +123,11 @@ public class EditArticleFragment extends Fragment {
     }
 
     private void initViews(View view) {
-        titleEditTextView = view.findViewById(R.id.title_text);
-        secondaryHeaderEditTextView = view.findViewById(R.id.secondary_header_text);
-        bodyEditTextView = view.findViewById(R.id.body_tex);
+        titleEditTextView = view.findViewById(R.id.header_edittext);
+        secondaryHeaderEditTextView = view.findViewById(R.id.secondary_header_edittext);
+        bodyEditTextView = view.findViewById(R.id.body_edittext);
         saveButton = view.findViewById(R.id.save_button);
         imagePreview = view.findViewById(R.id.image_imageview);
-        fab = view.findViewById(R.id.edit_article_fab);
     }
 
     private void setSaveClick() {

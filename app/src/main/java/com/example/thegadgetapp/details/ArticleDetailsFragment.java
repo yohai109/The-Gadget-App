@@ -76,7 +76,7 @@ public class ArticleDetailsFragment extends Fragment {
         fab.setOnClickListener(v -> {
             Navigation.findNavController(v).navigate(
                     ArticleDetailsFragmentDirections.
-                            actionArticleDetailsFragmentToArticleEditFragment2(articleID)
+                            actionArticleDetailsFragmentToArticleEditFragment(articleID)
             );
         });
     }

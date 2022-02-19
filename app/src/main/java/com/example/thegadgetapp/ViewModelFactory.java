@@ -10,6 +10,7 @@ import com.example.thegadgetapp.database.FirebaseRepository;
 import com.example.thegadgetapp.database.GadgetDatabase;
 import com.example.thegadgetapp.database.SharedPreferencesRepository;
 import com.example.thegadgetapp.details.DetailsViewModel;
+import com.example.thegadgetapp.editarticle.EditArticleViewModel;
 import com.example.thegadgetapp.editprofile.EditProfileViewModel;
 import com.example.thegadgetapp.login.LoginViewModel;
 import com.example.thegadgetapp.newsfeed.NewsFeedViewModel;
@@ -51,6 +52,8 @@ public class ViewModelFactory implements ViewModelProvider.Factory {
             return (T) new ProfileViewModel(gadgetDatabase, firebaseRepository, sharedPreferencesRepository);
         } else if (modelClass.equals(EditProfileViewModel.class)) {
             return (T) new EditProfileViewModel(gadgetDatabase, firebaseRepository, sharedPreferencesRepository);
+        } else if (modelClass.equals(EditArticleViewModel.class)) {
+            return (T) new EditArticleViewModel(gadgetDatabase, firebaseRepository);
         }
         return null;
     }

@@ -52,7 +52,6 @@ public class EditArticleViewModel extends ViewModel {
         remoteDB.uploadImage(data, callback);
     }
 
-
     public LiveData<Article> getArticle(String Id) {
         return localDB.articleDao().getById(Id);
     }
