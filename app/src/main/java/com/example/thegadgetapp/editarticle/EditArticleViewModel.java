@@ -8,6 +8,7 @@ import com.example.thegadgetapp.database.GadgetDatabase;
 import com.example.thegadgetapp.database.entities.Article;
 
 import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
 public class EditArticleViewModel extends ViewModel {
 
@@ -18,11 +19,11 @@ public class EditArticleViewModel extends ViewModel {
     public EditArticleViewModel(GadgetDatabase localDB, FirebaseRepository remoteDB) {
         this.localDB = localDB;
         this.remoteDB = remoteDB;
+        this.executor = Executors.newFixedThreadPool(2);
     }
 
     public void saveArticle(Article newArticle) {
         executor.execute(() -> {
-            localDB.articleDao().insert(newArticle);
             remoteDB.saveArticle(newArticle);
         });
     }

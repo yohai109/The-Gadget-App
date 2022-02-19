@@ -128,6 +128,7 @@ public class EditArticleFragment extends Fragment {
         bodyEditTextView = view.findViewById(R.id.body_edittext);
         saveButton = view.findViewById(R.id.save_button);
         imagePreview = view.findViewById(R.id.image_preview);
+        loadingView = view.findViewById(R.id.loading_spinner);
     }
 
     private void setSaveClick() {
@@ -156,16 +157,13 @@ public class EditArticleFragment extends Fragment {
         String header = titleEditTextView.getText().toString();
         String secondaryHeader = secondaryHeaderEditTextView.getText().toString();
         String body = bodyEditTextView.getText().toString();
-        Article newArticle = new Article(
-                articleId,
+
+        viewModel.update(articleId,
                 ((MainActivity) requireActivity()).currUserId,
                 header,
                 secondaryHeader,
                 body,
-                uploadedImageUri.toString()
-        );
-
-        viewModel.saveArticle(newArticle);
+                uploadedImageUri.toString());
         loadingView.setVisibility(View.GONE);
         Navigation.findNavController(saveButton).navigateUp();
     }
