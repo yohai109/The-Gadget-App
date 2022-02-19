@@ -1,23 +1,23 @@
 package com.example.thegadgetapp.database.entities;
 
-import android.net.Uri;
-
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
+import com.google.firebase.firestore.DocumentSnapshot;
+
 import java.util.HashMap;
 import java.util.Map;
 
 @Entity(
-        tableName = "Articles",
-        foreignKeys = {@ForeignKey(
-                entity = User.class,
-                parentColumns = "id",
-                childColumns = "creatorId",
-                onDelete = ForeignKey.CASCADE
-        )}
+        tableName = "Articles"//,
+//        foreignKeys = {@ForeignKey(
+//                entity = User.class,
+//                parentColumns = "id",
+//                childColumns = "creatorId",
+//                onDelete = ForeignKey.CASCADE
+//        )}
 )
 public class Article {
     @PrimaryKey
@@ -63,5 +63,16 @@ public class Article {
         map.put("body", article.body);
         map.put("imageUri", article.imageUri);
         return map;
+    }
+
+    public static Article fromMap(DocumentSnapshot map) {
+        return new Article(
+                (String) map.get("_id"),
+                (String) map.get("creatorId"),
+                (String) map.get("header"),
+                (String) map.get("secondaryHeader"),
+                (String) map.get("body"),
+                (String) map.get("imageUri")
+        );
     }
 }
