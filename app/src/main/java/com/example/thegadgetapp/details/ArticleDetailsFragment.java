@@ -15,17 +15,20 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.thegadgetapp.R;
 import com.example.thegadgetapp.ViewModelFactory;
 import com.example.thegadgetapp.activity.MainActivity;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.squareup.picasso.Picasso;
 
 public class ArticleDetailsFragment extends Fragment {
 
-    DetailsViewModel viewModel;
-    String articleID;
+    private DetailsViewModel viewModel;
+    private String articleID;
+    private String currUserId;
 
-    TextView titleTextView;
-    TextView secondaryHeaderTextView;
-    TextView bodyTextView;
+    private TextView titleTextView;
+    private TextView secondaryHeaderTextView;
+    private TextView bodyTextView;
     private ImageView imageView;
+    private FloatingActionButton fab;
 
     public ArticleDetailsFragment() {
     }
@@ -46,9 +49,11 @@ public class ArticleDetailsFragment extends Fragment {
         secondaryHeaderTextView = view.findViewById(R.id.secondary_header_text);
         bodyTextView = view.findViewById(R.id.body_tex);
         imageView = view.findViewById(R.id.image_imageview);
+        fab = view.findViewById(R.id.edit_article_fab);
 
         ViewModelFactory factory = ((MainActivity) requireActivity()).getFactory();
         viewModel = new ViewModelProvider(this, factory).get(DetailsViewModel.class);
+        currUserId = viewModel.getCurrUserId();
         viewModel.getArticle(articleID).observe(getViewLifecycleOwner(), article -> {
             if (article != null) {
                 titleTextView.setText(article.header);
@@ -57,6 +62,12 @@ public class ArticleDetailsFragment extends Fragment {
                 Picasso.get()
                         .load(article.imageUri)
                         .into(imageView);
+
+                if (!currUserId.equals(article.creatorId)) {
+                    fab.hide();
+                } else {
+                    fab.show();
+                }
             }
         });
     }

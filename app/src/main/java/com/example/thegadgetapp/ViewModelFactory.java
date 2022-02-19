@@ -41,7 +41,7 @@ public class ViewModelFactory implements ViewModelProvider.Factory {
         } else if (modelClass.equals(CreateArticleViewModel.class)) {
             return (T) new CreateArticleViewModel(gadgetDatabase, firebaseRepository);
         } else if (modelClass.equals(DetailsViewModel.class)) {
-            return (T) new DetailsViewModel(gadgetDatabase, firebaseRepository);
+            return (T) new DetailsViewModel(gadgetDatabase, sharedPreferencesRepository);
         }
         return null;
     }

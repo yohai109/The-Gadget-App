@@ -8,140 +8,133 @@
 
     <ProgressBar
         android:id="@+id/loading_spinner"
-        android:layout_width="127dp"
-        android:layout_height="110dp"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
         android:elevation="6dp"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.468"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.924"
         tools:visibility="visible" />
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="124dp"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="51dp">
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+            <ImageView
+                android:id="@+id/image"
+                android:layout_width="133dp"
+                android:layout_height="122dp"
+                android:layout_marginTop="32dp"
+                android:src="@drawable/article"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
             <TextView
                 android:id="@+id/header_label"
-                android:layout_width="78dp"
-                android:layout_height="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="44dp"
                 android:fontFamily="@font/audiowide"
                 android:labelFor="@id/header_edittext"
+                android:paddingStart="4dp"
+                android:paddingEnd="4dp"
                 android:text="Header:"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="@id/header_edittext"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@id/image" />
 
             <EditText
                 android:id="@+id/header_edittext"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
-                android:layout_marginTop="4dp"
                 android:hint="header"
                 android:textSize="16sp"
                 app:layout_constraintTop_toBottomOf="@id/header_label"
                 tools:layout_editor_absoluteX="16dp" />
+
+            <TextView
+                android:id="@+id/secondary_header_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/audiowide"
+                android:paddingStart="4dp"
+                android:paddingEnd="4dp"
+                android:text="Secondary header:"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="@id/header_edittext"
+                app:layout_constraintTop_toBottomOf="@id/header_edittext" />
+
+            <EditText
+                android:id="@+id/secondary_header_edittext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:hint="secondary header"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="@id/secondary_header_label"
+                app:layout_constraintTop_toBottomOf="@id/secondary_header_label" />
+
+            <TextView
+                android:id="@+id/body_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/audiowide"
+                android:paddingStart="4dp"
+                android:paddingEnd="4dp"
+                android:text="Body"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="@id/secondary_header_edittext"
+                app:layout_constraintTop_toBottomOf="@id/secondary_header_edittext" />
+
+            <EditText
+                android:id="@+id/body_edittext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:hint="body"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="@id/body_label"
+                app:layout_constraintTop_toBottomOf="@id/body_label" />
+
+
+            <Button
+                android:id="@+id/upload_image_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/audiowide"
+                android:text="upload image"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/body_edittext" />
 
             <ImageView
                 android:id="@+id/image_preview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toTopOf="@id/save_button"
-                app:layout_constraintTop_toBottomOf="@id/upload_image_button"
-                app:layout_constraintVertical_bias="0.0"
-                tools:layout_editor_absoluteX="0dp" />
+                app:layout_constraintTop_toBottomOf="@id/upload_image_button" />
+
+            <Button
+                android:id="@+id/save_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/audiowide"
+                android:text="apply"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 
-    <Button
-        android:id="@+id/save_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/audiowide"
-        android:text="apply"
-        tools:layout_editor_absoluteX="77dp"
-        tools:layout_editor_absoluteY="512dp" />
-
-    <Button
-        android:id="@+id/delete_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/red"
-        android:fontFamily="@font/audiowide"
-        android:text="delete"
-        tools:layout_editor_absoluteX="217dp"
-        tools:layout_editor_absoluteY="512dp"
-        tools:visibility="visible" />
-
-    <Button
-        android:id="@+id/upload_image_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/audiowide"
-        android:text="upload image"
-        tools:layout_editor_absoluteX="119dp"
-        tools:layout_editor_absoluteY="421dp" />
-
-    <EditText
-        android:id="@+id/body_edittext"
-        android:layout_width="382dp"
-        android:layout_height="77dp"
-        android:layout_marginHorizontal="16dp"
-        android:gravity="top"
-        android:hint="body"
-        android:textSize="16sp"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="336dp" />
-
-    <TextView
-        android:id="@+id/body_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/audiowide"
-        android:text="Body"
-        android:textSize="16sp"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="315dp" />
-
-    <EditText
-        android:id="@+id/secondary_header_edittext"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp"
-        android:hint="secondary header"
-        android:textSize="16sp"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="263dp" />
-
-    <TextView
-        android:id="@+id/secondary_header_label"
-        android:layout_width="174dp"
-        android:layout_height="21dp"
-        android:fontFamily="@font/audiowide"
-        android:text="Secondary header:"
-        android:textSize="16sp"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="242dp" />
-
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="133dp"
-        android:layout_height="122dp"
-        android:src="@drawable/article"
-        tools:layout_editor_absoluteX="133dp"
-        tools:layout_editor_absoluteY="16dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
