@@ -14,5 +14,7 @@
         android:icon="@drawable/ic_avatar_24px"
         app:showAsAction="always"
         android:title="profile"
+        android:visible="false"
+        tools:visible="true"
         />
 </menu>

@@ -24,10 +24,10 @@ public class ActivityViewModel extends ViewModel {
         this.currUserRepo = currUserRepo;
     }
 
-    public void initDB() {
-        User user = new User(UUID.randomUUID().toString(), "yohai", "123");
-        executor.execute(() -> localDB.userDao().insert(user));
-    }
+//    public void initDB() {
+//        User user = new User(UUID.randomUUID().toString(), "yohai", "123");
+//        executor.execute(() -> localDB.userDao().insert(user));
+//    }
 
     public void logout(){
         currUserRepo.setCurrUser(null);

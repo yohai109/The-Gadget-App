@@ -29,7 +29,6 @@ public class MainActivity extends AppCompatActivity {
 
         ViewModelFactory factory = ((MainApplication) getApplication()).getFactory();
         viewModel = new ViewModelProvider(this, factory).get(ActivityViewModel.class);
-        viewModel.initDB();
 
         initToolbar();
         initNavigation();

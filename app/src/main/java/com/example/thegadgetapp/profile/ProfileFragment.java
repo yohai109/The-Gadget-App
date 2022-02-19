@@ -1,25 +1,31 @@
 package com.example.thegadgetapp.profile;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
+import androidx.navigation.Navigation;
 
 import com.example.thegadgetapp.R;
 import com.example.thegadgetapp.ViewModelFactory;
 import com.example.thegadgetapp.activity.MainActivity;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.squareup.picasso.Picasso;
 
 public class ProfileFragment extends Fragment {
 
     TextView usernameTextView;
+    TextView nameTextView;
+    ImageView avatarImageView;
     ProfileViewModel viewModel;
+    FloatingActionButton fab;
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -37,11 +43,28 @@ public class ProfileFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         usernameTextView = view.findViewById(R.id.username_text_view);
+        nameTextView = view.findViewById(R.id.name);
+        avatarImageView = view.findViewById(R.id.avatar);
+        fab = view.findViewById(R.id.profile_fab);
 
         ViewModelFactory factory = ((MainActivity) requireActivity()).getFactory();
         viewModel = new ViewModelProvider(this, factory).get(ProfileViewModel.class);
         viewModel.getCurrUser().observe(getViewLifecycleOwner(), user -> {
-            usernameTextView.setText(user.username);
+            if (user != null) {
+                usernameTextView.setText(user.username);
+                nameTextView.setText(user.name);
+                if (user.avatarUri != null && !user.avatarUri.equals("")) {
+                    Picasso.get()
+                            .load(user.avatarUri)
+                            .into(avatarImageView);
+                }
+            }
+        });
+
+        fab.setOnClickListener(v -> {
+            Navigation.findNavController(v).navigate(
+                    ProfileFragmentDirections.actionProfileFragmentToEditProfileFragment()
+            );
         });
     }
 }

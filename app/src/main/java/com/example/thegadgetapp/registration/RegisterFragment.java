@@ -32,6 +32,7 @@ public class RegisterFragment extends Fragment {
     Button submitBtn;
     EditText username;
     EditText password;
+    EditText name;
     Handler mainThread = HandlerCompat.createAsync(Looper.getMainLooper());
     private TextView secondPassword;
 
@@ -64,7 +65,9 @@ public class RegisterFragment extends Fragment {
             User user = new User(
                     id,
                     username.getText().toString(),
-                    password.getText().toString()
+                    password.getText().toString(),
+                    "",
+                    name.getText().toString()
             );
             if (user.username.equals("") || user.password.equals("")) {
                 Toast.makeText(getContext(), "please enter username and password", Toast.LENGTH_LONG).show();
@@ -93,6 +96,7 @@ public class RegisterFragment extends Fragment {
         password = view.findViewById(R.id.password);
         submitBtn = view.findViewById(R.id.submit_register_button);
         secondPassword = view.findViewById(R.id.password2);
+        name = view.findViewById(R.id.name);
     }
 
 

@@ -25,8 +25,10 @@ public class LoginViewModel extends ViewModel {
 
     public void tryLogin(String username, String password, LoginCallback callback) {
         executor.execute(() -> {
-//            User user = localDB.userDao().getByUsername(username);
             remoteDB.getUser(username, user -> {
+                executor.execute(() -> {
+                    localDB.userDao().insert(user);
+                });
                 callback.login(user != null && user.password.equals(password), user);
             });
         });

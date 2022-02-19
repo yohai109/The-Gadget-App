@@ -72,6 +72,19 @@ public class FirebaseRepository {
                 });
     }
 
+    public void updateUser(User user) {
+        db.collection("Users")
+                .whereEqualTo("id", user.id)
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        for (DocumentSnapshot doc : task.getResult()) {
+                            doc.getReference().update(User.toMap(user));
+                        }
+                    }
+                });
+    }
+
     public void getUser(String username, getUserCallback callback) {
         db.collection("Users")
                 .whereEqualTo("username", username)
