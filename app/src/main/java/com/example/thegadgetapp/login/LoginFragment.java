@@ -76,6 +76,8 @@ public class LoginFragment extends Fragment {
                                 Navigation.findNavController(v).navigate(
                                         LoginFragmentDirections.actionLoginFragmentToNewsFeedFragment(user.id)
                                 );
+                            } else {
+                                Toast.makeText(getContext(), "wrong username or password", Toast.LENGTH_LONG).show();
                             }
                         });
                     });

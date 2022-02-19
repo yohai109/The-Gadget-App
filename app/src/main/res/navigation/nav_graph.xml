@@ -62,7 +62,7 @@
             android:name="articleId"
             app:argType="string" />
         <action
-            android:id="@+id/action_articleDetailsFragment_to_articleEditFragment2"
+            android:id="@+id/action_articleDetailsFragment_to_articleEditFragment"
             app:destination="@id/articleEditFragment" />
     </fragment>
     <fragment
