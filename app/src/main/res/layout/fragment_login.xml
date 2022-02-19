@@ -7,7 +7,7 @@
     tools:context=".login.LoginFragment">
 
     <Button
-        android:id="@+id/login_button2"
+        android:id="@+id/register_button"
         style="@style/Widget.AppCompat.Button"
         android:layout_width="184dp"
         android:layout_height="38dp"

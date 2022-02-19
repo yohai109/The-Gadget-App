@@ -23,7 +23,7 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/login_button"
+        android:id="@+id/submit_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
@@ -44,7 +44,8 @@
         android:textColor="#0B0B0B"
         android:textSize="20sp"
         tools:layout_editor_absoluteX="15dp"
-        tools:layout_editor_absoluteY="349dp" />
+        tools:layout_editor_absoluteY="349dp"
+        tools:ignore="MissingConstraints" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -55,7 +56,8 @@
         android:textColor="#0B0B0B"
         android:textSize="20sp"
         tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="212dp" />
+        tools:layout_editor_absoluteY="212dp"
+        tools:ignore="MissingConstraints" />
 
     <EditText
         android:id="@+id/username"
@@ -66,7 +68,8 @@
         android:inputType="text"
         android:textSize="16sp"
         tools:layout_editor_absoluteX="31dp"
-        tools:layout_editor_absoluteY="234dp" />
+        tools:layout_editor_absoluteY="234dp"
+        tools:ignore="MissingConstraints" />
 
     <EditText
         android:id="@+id/password"
@@ -77,7 +80,8 @@
         android:inputType="textPassword"
         android:textSize="16sp"
         tools:layout_editor_absoluteX="31dp"
-        tools:layout_editor_absoluteY="304dp" />
+        tools:layout_editor_absoluteY="304dp"
+        tools:ignore="MissingConstraints" />
 
     <EditText
         android:id="@+id/password2"
@@ -88,7 +92,8 @@
         android:inputType="textPassword"
         android:textSize="16sp"
         tools:layout_editor_absoluteX="31dp"
-        tools:layout_editor_absoluteY="376dp" />
+        tools:layout_editor_absoluteY="376dp"
+        tools:ignore="MissingConstraints" />
 
     <TextView
         android:layout_width="121dp"
@@ -99,7 +104,8 @@
         android:textColor="#0B0B0B"
         android:textSize="20sp"
         tools:layout_editor_absoluteX="15dp"
-        tools:layout_editor_absoluteY="277dp" />
+        tools:layout_editor_absoluteY="277dp"
+        tools:ignore="MissingConstraints" />
 
     <ImageView
         android:id="@+id/imageView2"
@@ -107,7 +113,8 @@
         android:layout_height="154dp"
         android:src="@drawable/register"
         tools:layout_editor_absoluteX="101dp"
-        tools:layout_editor_absoluteY="30dp" />
+        tools:layout_editor_absoluteY="30dp"
+        tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/textView5"
@@ -115,6 +122,7 @@
         android:layout_height="20dp"
         android:text="@The Gadget App Team"
         tools:layout_editor_absoluteX="129dp"
-        tools:layout_editor_absoluteY="567dp" />
+        tools:layout_editor_absoluteY="567dp"
+        tools:ignore="MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
