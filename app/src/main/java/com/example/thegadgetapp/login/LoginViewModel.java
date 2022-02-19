@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel;
 
 import com.example.thegadgetapp.database.FirebaseRepository;
 import com.example.thegadgetapp.database.GadgetDatabase;
+import com.example.thegadgetapp.database.SharedPreferencesRepository;
 import com.example.thegadgetapp.database.entities.User;
 
 import java.util.concurrent.Executor;
@@ -12,11 +13,13 @@ import java.util.concurrent.Executors;
 public class LoginViewModel extends ViewModel {
     private GadgetDatabase localDB;
     private FirebaseRepository remoteDB;
+    private SharedPreferencesRepository currUserRepo;
     private Executor executor;
 
-    public LoginViewModel(GadgetDatabase localDB, FirebaseRepository remoteDB) {
+    public LoginViewModel(GadgetDatabase localDB, FirebaseRepository remoteDB, SharedPreferencesRepository currUserRepo) {
         this.localDB = localDB;
         this.remoteDB = remoteDB;
+        this.currUserRepo = currUserRepo;
         this.executor = Executors.newFixedThreadPool(2);
     }
 
@@ -25,6 +28,14 @@ public class LoginViewModel extends ViewModel {
             User user = localDB.userDao().getByUsername(username);
             callback.login(user != null && user.password.equals(password), user);
         });
+    }
+
+    public void setCurrLoginUser(String id) {
+        currUserRepo.setCurrUser(id);
+    }
+
+    public String getCurrUserId(){
+        return currUserRepo.getCurrUserId();
     }
 
     public interface LoginCallback {
@@ -37,5 +48,6 @@ public class LoginViewModel extends ViewModel {
         this.localDB = null;
         this.remoteDB = null;
         this.executor = null;
+        currUserRepo = null;
     }
 }
