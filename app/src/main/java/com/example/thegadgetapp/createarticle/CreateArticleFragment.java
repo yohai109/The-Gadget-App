@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -37,6 +38,8 @@ public class CreateArticleFragment extends Fragment {
     private EditText bodyEdittext;
     private Button saveButton;
     private ImageView imagePreview;
+    private ProgressBar loadingView;
+
     private CreateArticleViewModel viewModel;
     private Uri uploadedImageUri;
 
@@ -117,10 +120,12 @@ public class CreateArticleFragment extends Fragment {
         bodyEdittext = view.findViewById(R.id.body_edittext);
         saveButton = view.findViewById(R.id.save_button);
         imagePreview = view.findViewById(R.id.image_preview);
+        loadingView = view.findViewById(R.id.loading_spinner);
     }
 
     private void setSaveClick() {
         saveButton.setOnClickListener(v -> {
+            loadingView.setVisibility(View.VISIBLE);
             uploadImage();
         });
     }
@@ -154,6 +159,7 @@ public class CreateArticleFragment extends Fragment {
         );
 
         viewModel.saveArticle(newArticle);
+        loadingView.setVisibility(View.GONE);
         Navigation.findNavController(saveButton).navigateUp();
     }
 }
