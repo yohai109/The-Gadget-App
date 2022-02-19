@@ -25,7 +25,6 @@ import androidx.navigation.Navigation;
 import com.example.thegadgetapp.R;
 import com.example.thegadgetapp.ViewModelFactory;
 import com.example.thegadgetapp.activity.MainActivity;
-import com.example.thegadgetapp.database.entities.Article;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.squareup.picasso.Picasso;
 
@@ -70,7 +69,7 @@ public class EditArticleFragment extends Fragment {
         articleId = EditArticleFragmentArgs.fromBundle(getArguments()).getArticleId();
 
         viewModel.getArticle(articleId).observe(getViewLifecycleOwner(), article -> {
-            if (article != null ) {
+            if (article != null) {
                 titleEditTextView.setText(article.header);
                 secondaryHeaderEditTextView.setText(article.secondaryHeader);
                 bodyEditTextView.setText(article.body);
@@ -90,6 +89,7 @@ public class EditArticleFragment extends Fragment {
 
         deleteButton.setOnClickListener(v -> {
             viewModel.deleteArticle(articleId);
+            Navigation.findNavController(v).navigate(EditArticleFragmentDirections.actionArticleEditFragmentToNewsFeedFragment(((MainActivity) requireActivity()).currUserId));
         });
     }
 
@@ -141,7 +141,7 @@ public class EditArticleFragment extends Fragment {
     private void setSaveClick() {
         saveButton.setOnClickListener(v -> {
             loadingView.setVisibility(View.VISIBLE);
-                uploadImage();
+            uploadImage();
         });
     }
 
