@@ -6,28 +6,48 @@
     android:layout_height="match_parent"
     tools:context=".login.LoginFragment">
 
+    <Button
+        android:id="@+id/login_button2"
+        style="@style/Widget.AppCompat.Button"
+        android:layout_width="184dp"
+        android:layout_height="38dp"
+        android:layout_marginTop="88dp"
+        android:background="#224C48"
+        android:fontFamily="@font/audiowide"
+        android:text="Register"
+        android:textAlignment="center"
+        app:icon="@drawable/personal"
+        app:iconSize="20dp"
+        app:layout_constraintEnd_toEndOf="@id/text_container"
+        app:layout_constraintStart_toStartOf="@id/text_container"
+        app:layout_constraintTop_toBottomOf="@id/text_container" />
+
     <LinearLayout
         android:id="@+id/text_container"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="367dp"
+        android:layout_height="171dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.525">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/audiowide"
             android:labelFor="@id/password"
             android:text="Username:"
-            android:textSize="16sp" />
+            android:textColor="#3C3232"
+            android:textSize="24sp" />
 
         <EditText
             android:id="@+id/username"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:autofillHints="username"
+            android:layout_marginLeft="10dp"
             android:hint="username"
             android:inputType="text"
             android:textSize="16sp" />
@@ -35,27 +55,64 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/audiowide"
             android:labelFor="@id/password"
             android:text="Password:"
-            android:textSize="16sp" />
+            android:textColor="#4A3E3E"
+            android:textSize="24sp" />
 
         <EditText
             android:id="@+id/password"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:autofillHints="username"
             android:hint="password"
+            android:layout_marginLeft="10dp"
             android:inputType="textPassword"
             android:textSize="16sp" />
     </LinearLayout>
 
     <Button
         android:id="@+id/login_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="180dp"
+        android:layout_height="43dp"
+        android:layout_marginTop="44dp"
+        android:fontFamily="@font/audiowide"
+        android:text="Log in"
         app:layout_constraintEnd_toEndOf="@id/text_container"
         app:layout_constraintStart_toStartOf="@id/text_container"
-        app:layout_constraintTop_toBottomOf="@id/text_container"
-        android:text="Log in"/>
+        app:layout_constraintTop_toBottomOf="@id/text_container" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="289dp"
+        android:layout_height="213dp"
+        android:src="@drawable/monitor"
+        tools:layout_editor_absoluteX="61dp"
+        tools:layout_editor_absoluteY="49dp"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/allerta_stencil"
+        android:text="TGA"
+        android:textAlignment="center"
+        android:textColor="#090808"
+        android:textSize="60sp"
+        tools:layout_editor_absoluteX="143dp"
+        tools:layout_editor_absoluteY="95dp"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Forgot your password?"
+        tools:layout_editor_absoluteX="227dp"
+        tools:layout_editor_absoluteY="475dp"
+        tools:ignore="MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
