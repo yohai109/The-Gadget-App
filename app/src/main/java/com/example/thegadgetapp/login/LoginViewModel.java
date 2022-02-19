@@ -25,8 +25,10 @@ public class LoginViewModel extends ViewModel {
 
     public void tryLogin(String username, String password, LoginCallback callback) {
         executor.execute(() -> {
-            User user = localDB.userDao().getByUsername(username);
-            callback.login(user != null && user.password.equals(password), user);
+//            User user = localDB.userDao().getByUsername(username);
+            remoteDB.getUser(username, user -> {
+                callback.login(user != null && user.password.equals(password), user);
+            });
         });
     }
 
@@ -34,7 +36,7 @@ public class LoginViewModel extends ViewModel {
         currUserRepo.setCurrUser(id);
     }
 
-    public String getCurrUserId(){
+    public String getCurrUserId() {
         return currUserRepo.getCurrUserId();
     }
 
