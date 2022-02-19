@@ -2,16 +2,13 @@ package com.example.thegadgetapp.database;
 
 import android.net.Uri;
 
-import androidx.annotation.NonNull;
-
 import com.example.thegadgetapp.database.entities.Article;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreSettings;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 
 import java.util.UUID;
 
@@ -42,6 +39,10 @@ public class FirebaseRepository {
 
     public void saveArticle(Article newArticle) {
         db.collection("Articles").add(Article.toMap(newArticle));
+    }
+
+    public Task<QuerySnapshot> getAllArticles(){
+        return db.collection("Articles").get();
     }
 
     public void uploadImage(byte[] data, onImageUploadComplete callback) {

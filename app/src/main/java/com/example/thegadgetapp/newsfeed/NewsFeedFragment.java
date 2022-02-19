@@ -79,7 +79,7 @@ public class NewsFeedFragment extends Fragment {
     private void initRefresh() {
         swipeRefreshLayout.setOnRefreshListener(() -> {
             swipeRefreshLayout.setRefreshing(false);
-            // TODO add firebase data fetching here
+            viewModel.refreshFromRemote();
         });
     }
 

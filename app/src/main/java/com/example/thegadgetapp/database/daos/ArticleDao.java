@@ -1,5 +1,7 @@
 package com.example.thegadgetapp.database.daos;
 
+import static androidx.room.OnConflictStrategy.REPLACE;
+
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
@@ -11,10 +13,10 @@ import java.util.List;
 
 @Dao
 public interface ArticleDao {
-    @Insert
+    @Insert(onConflict = REPLACE)
     void insert(Article article);
 
-    @Insert
+    @Insert(onConflict = REPLACE)
     void insert(Article... article);
 
     @Query("SELECT * FROM Articles")
