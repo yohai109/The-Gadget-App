@@ -4,6 +4,9 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -47,6 +50,8 @@ public class LoginFragment extends Fragment {
         ViewModelFactory factory = ((MainActivity) requireActivity()).getFactory();
         viewModel = new ViewModelProvider(this, factory).get(LoginViewModel.class);
 
+        hideLogoutButton();
+
         String currUserId = viewModel.getCurrUserId();
         if (currUserId != null) {
             Navigation.findNavController(view).navigate(
@@ -75,5 +80,9 @@ public class LoginFragment extends Fragment {
             });
 
         }
+    }
+
+    private void hideLogoutButton(){
+        ((MainActivity) requireActivity()).toggleLogoutButton(false);
     }
 }

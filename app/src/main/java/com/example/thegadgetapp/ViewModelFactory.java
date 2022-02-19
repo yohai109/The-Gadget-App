@@ -35,7 +35,7 @@ public class ViewModelFactory implements ViewModelProvider.Factory {
         if (modelClass.equals(LoginViewModel.class)) {
             return (T) new LoginViewModel(gadgetDatabase, firebaseRepository, sharedPreferencesRepository);
         } else if (modelClass.equals(ActivityViewModel.class)) {
-            return (T) new ActivityViewModel(gadgetDatabase, firebaseRepository);
+            return (T) new ActivityViewModel(gadgetDatabase, firebaseRepository, sharedPreferencesRepository);
         } else if (modelClass.equals(NewsFeedViewModel.class)) {
             return (T) new NewsFeedViewModel(gadgetDatabase, firebaseRepository);
         } else if (modelClass.equals(CreateArticleViewModel.class)) {
