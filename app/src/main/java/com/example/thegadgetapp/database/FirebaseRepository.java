@@ -3,6 +3,7 @@ package com.example.thegadgetapp.database;
 import android.net.Uri;
 
 import com.example.thegadgetapp.database.entities.Article;
+import com.example.thegadgetapp.database.entities.User;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreSettings;
@@ -52,6 +53,10 @@ public class FirebaseRepository {
                 ref.getDownloadUrl().addOnCompleteListener(task2 -> callback.onComplete(task2.getResult()));
             }
         });
+    }
+
+    public void insert(User user){
+        db.collection("Users").add(user);
     }
 
     public interface onImageUploadComplete {

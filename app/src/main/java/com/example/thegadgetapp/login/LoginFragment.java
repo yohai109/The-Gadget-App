@@ -25,6 +25,7 @@ import com.example.thegadgetapp.activity.MainActivity;
 public class LoginFragment extends Fragment {
     LoginViewModel viewModel;
     Button loginBtn;
+    Button registerBtn;
     Handler mainThread = HandlerCompat.createAsync(Looper.getMainLooper());
 
     public LoginFragment() {
@@ -58,6 +59,7 @@ public class LoginFragment extends Fragment {
             );
         } else {
             loginBtn = view.findViewById(R.id.login_button);
+            registerBtn = view.findViewById(R.id.register_button);
             loginBtn.setOnClickListener(v -> {
                 viewModel.tryLogin("yohai", "123", (isSuccess, user) -> {
                     if (isSuccess) {
@@ -71,6 +73,12 @@ public class LoginFragment extends Fragment {
                     }
                 });
             });
+            registerBtn.setOnClickListener(v -> {
+                Navigation.findNavController(v).navigate(
+                        LoginFragmentDirections.actionLoginFragmentToRegisterFragment()
+                );
+            });
+
         }
     }
 
