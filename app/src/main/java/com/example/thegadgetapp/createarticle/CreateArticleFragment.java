@@ -4,6 +4,7 @@ import static android.app.Activity.RESULT_OK;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -18,12 +19,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 
 import com.example.thegadgetapp.R;
 import com.example.thegadgetapp.ViewModelFactory;
 import com.example.thegadgetapp.activity.MainActivity;
 import com.example.thegadgetapp.database.entities.Article;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.UUID;
 
@@ -85,7 +88,6 @@ public class CreateArticleFragment extends Fragment {
                 // Get the url of the image from data
                 Uri selectedImageUri = data.getData();
                 if (selectedImageUri != null) {
-                    uploadedImageUri = selectedImageUri;
                     try {
                         // Setting image on image view using Bitmap
                         Bitmap bitmap = MediaStore
@@ -119,18 +121,39 @@ public class CreateArticleFragment extends Fragment {
 
     private void setSaveClick() {
         saveButton.setOnClickListener(v -> {
-            String header = headerEdittext.getText().toString();
-            String secondaryHeader = secondaryHeaderEdittext.getText().toString();
-            String body = bodyEdittext.getText().toString();
-            Article newArticle = new Article(
-                    UUID.randomUUID().toString(),
-                    ((MainActivity) requireActivity()).currUserId,
-                    header,
-                    secondaryHeader,
-                    body
-            );
-
-            viewModel.saveArticle(newArticle);
+            uploadImage();
         });
+    }
+
+    private void uploadImage() {
+        // Get the data from an ImageView as bytes
+        imagePreview.setDrawingCacheEnabled(true);
+        imagePreview.buildDrawingCache();
+        Bitmap bitmap = ((BitmapDrawable) imagePreview.getDrawable()).getBitmap();
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        byte[] data = baos.toByteArray();
+
+        viewModel.uploadImage(data, uri -> {
+            uploadedImageUri = uri;
+            saveArticle();
+        });
+    }
+
+    private void saveArticle() {
+        String header = headerEdittext.getText().toString();
+        String secondaryHeader = secondaryHeaderEdittext.getText().toString();
+        String body = bodyEdittext.getText().toString();
+        Article newArticle = new Article(
+                UUID.randomUUID().toString(),
+                ((MainActivity) requireActivity()).currUserId,
+                header,
+                secondaryHeader,
+                body,
+                uploadedImageUri.toString()
+        );
+
+        viewModel.saveArticle(newArticle);
+        Navigation.findNavController(saveButton).navigateUp();
     }
 }

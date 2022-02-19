@@ -28,6 +28,10 @@ public class CreateArticleViewModel extends ViewModel {
         });
     }
 
+    public void uploadImage(byte[] data, FirebaseRepository.onImageUploadComplete callback) {
+        remoteDB.uploadImage(data, callback);
+    }
+
     @Override
     protected void onCleared() {
         super.onCleared();
