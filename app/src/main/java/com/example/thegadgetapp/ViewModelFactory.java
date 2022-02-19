@@ -11,6 +11,7 @@ import com.example.thegadgetapp.database.GadgetDatabase;
 import com.example.thegadgetapp.database.SharedPreferencesRepository;
 import com.example.thegadgetapp.details.DetailsViewModel;
 import com.example.thegadgetapp.login.LoginViewModel;
+import com.example.thegadgetapp.login.RegisterViewModel;
 import com.example.thegadgetapp.newsfeed.NewsFeedViewModel;
 
 public class ViewModelFactory implements ViewModelProvider.Factory {
@@ -42,6 +43,8 @@ public class ViewModelFactory implements ViewModelProvider.Factory {
             return (T) new CreateArticleViewModel(gadgetDatabase, firebaseRepository);
         } else if (modelClass.equals(DetailsViewModel.class)) {
             return (T) new DetailsViewModel(gadgetDatabase, sharedPreferencesRepository);
+        } else if (modelClass.equals(RegisterViewModel.class)) {
+            return (T) new RegisterViewModel(gadgetDatabase, firebaseRepository);
         }
         return null;
     }

@@ -14,7 +14,6 @@ import androidx.annotation.Nullable;
 import androidx.core.os.HandlerCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.Navigation;
 
 import com.example.thegadgetapp.R;
 import com.example.thegadgetapp.ViewModelFactory;
@@ -61,13 +60,12 @@ public class RegisterFragment extends Fragment {
         submitBtn = view.findViewById(R.id.submit_register_button);
 
         submitBtn.setOnClickListener(v -> {
-            User user =new User(
+            User user = new User(
                     id,
                     username.getText().toString(),
                     password.getText().toString());
             viewModel.insert(user);
-
-            });
+        });
     }
 
 
