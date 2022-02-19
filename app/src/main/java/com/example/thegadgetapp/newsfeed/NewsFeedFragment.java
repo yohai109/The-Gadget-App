@@ -2,6 +2,9 @@ package com.example.thegadgetapp.newsfeed;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -51,7 +54,14 @@ public class NewsFeedFragment extends Fragment {
         initAdapter();
         observeDB();
 
+        showLogoutButton();
+
         viewModel.refreshFromRemote();
+    }
+
+    @Override
+    public void onPrepareOptionsMenu(@NonNull Menu menu) {
+        super.onPrepareOptionsMenu(menu);
     }
 
     private void findViews(View view) {
@@ -94,5 +104,9 @@ public class NewsFeedFragment extends Fragment {
         viewModel.getAllArticles().observe(getViewLifecycleOwner(), articles -> {
             adapter.setData(articles);
         });
+    }
+
+    private void showLogoutButton(){
+        ((MainActivity) requireActivity()).toggleLogoutButton(true);
     }
 }
