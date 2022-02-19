@@ -110,7 +110,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
         android:fontFamily="@font/audiowide"
-
         android:text="Submit"
         app:layout_constraintEnd_toEndOf="@id/imageView2"
         app:layout_constraintStart_toStartOf="@id/imageView2"
@@ -121,12 +120,11 @@
         android:id="@+id/textView5"
         android:layout_width="155dp"
         android:layout_height="20dp"
-
         android:layout_marginTop="32dp"
         android:text="\@The Gadget App Team"
-        app:layout_constraintEnd_toEndOf="@id/login_button"
-        app:layout_constraintStart_toStartOf="@id/login_button"
-        app:layout_constraintTop_toBottomOf="@id/login_button" />
+        app:layout_constraintEnd_toEndOf="@id/submit_register_button"
+        app:layout_constraintStart_toStartOf="@id/submit_register_button"
+        app:layout_constraintTop_toBottomOf="@id/submit_register_button" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

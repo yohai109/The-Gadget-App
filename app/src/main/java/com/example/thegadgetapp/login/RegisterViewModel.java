@@ -1,5 +1,9 @@
 package com.example.thegadgetapp.login;
 
+import android.os.Handler;
+import android.os.Looper;
+
+import androidx.core.os.HandlerCompat;
 import androidx.lifecycle.ViewModel;
 
 import com.example.thegadgetapp.database.FirebaseRepository;
@@ -14,6 +18,7 @@ public class RegisterViewModel extends ViewModel {
     private GadgetDatabase localDB;
     private FirebaseRepository remoteDB;
     private Executor executor;
+    Handler mainThread = HandlerCompat.createAsync(Looper.getMainLooper());
 
     public RegisterViewModel(GadgetDatabase localDB, FirebaseRepository remoteDB) {
         this.localDB = localDB;
@@ -21,13 +26,21 @@ public class RegisterViewModel extends ViewModel {
         this.executor = Executors.newFixedThreadPool(2);
     }
 
-    public void insert(User user) {
+    public void insertUserRemote(User user, FirebaseRepository.insertUserCallback callback) {
         executor.execute(() -> {
-            localDB.userDao().insert(user);
-            remoteDB.insert(user);
+            remoteDB.insertUser(user, callback);
         });
     }
 
+    public void insertUserLocal(User user, FirebaseRepository.insertUserCallback callback) {
+        executor.execute(() -> {
+            localDB.userDao().insert(user);
+            mainThread.post(() -> {
+                callback.onComplete(true);
+            });
+        });
+
+    }
 
 
     @Override

@@ -5,6 +5,7 @@ import android.net.Uri;
 import com.example.thegadgetapp.database.entities.Article;
 import com.example.thegadgetapp.database.entities.User;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreSettings;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -42,7 +43,7 @@ public class FirebaseRepository {
         db.collection("Articles").add(Article.toMap(newArticle));
     }
 
-    public Task<QuerySnapshot> getAllArticles(){
+    public Task<QuerySnapshot> getAllArticles() {
         return db.collection("Articles").get();
     }
 
@@ -55,8 +56,25 @@ public class FirebaseRepository {
         });
     }
 
-    public void insert(User user){
-        db.collection("Users").add(user);
+    public void insertUser(User user, insertUserCallback callback) {
+        db.collection("Users")
+                .whereEqualTo("username", user.username)
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        if(task.getResult().isEmpty()){
+                            db.collection("Users").add(user);
+                            callback.onComplete(true);
+                        } else {
+                            callback.onComplete(false);
+                        }
+                    }
+                });
+//        db.collection("Users").add(user);
+    }
+
+    public interface insertUserCallback{
+        void onComplete(Boolean isSuccessful);
     }
 
     public interface onImageUploadComplete {
