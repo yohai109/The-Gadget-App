@@ -4,6 +4,7 @@ import static androidx.room.OnConflictStrategy.REPLACE;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
+import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
@@ -28,4 +29,7 @@ public interface ArticleDao {
 
     @Query("SELECT * FROM Articles where id is :id")
     LiveData<Article> getById(String id);
+
+    @Delete
+    void delete(Article... articles);
 }

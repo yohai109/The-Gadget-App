@@ -103,6 +103,19 @@ public class FirebaseRepository {
                 });
     }
 
+    public void deleteArticle(Article article) {
+        db.collection("Articles")
+                .whereEqualTo("_id", article.id)
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()){
+                        for (DocumentSnapshot doc: task.getResult()){
+                            doc.getReference().delete();
+                        }
+                    }
+                });
+    }
+
     public interface getUserCallback {
         void onComplete(User user);
     }
