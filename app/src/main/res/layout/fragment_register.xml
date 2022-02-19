@@ -16,7 +16,9 @@
         android:src="@drawable/register"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+
         app:layout_constraintTop_toTopOf="parent" />
+
 
     <TextView
         android:id="@+id/username_label"
@@ -30,8 +32,10 @@
         android:text="Username:"
         android:textColor="#0B0B0B"
         android:textSize="20sp"
+
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/imageView2" />
+
 
     <EditText
         android:id="@+id/username"
@@ -41,6 +45,7 @@
         android:hint="username"
         android:inputType="text"
         android:textSize="16sp"
+
         app:layout_constraintStart_toStartOf="@id/username_label"
         app:layout_constraintTop_toBottomOf="@id/username_label" />
 
@@ -58,6 +63,7 @@
         app:layout_constraintStart_toStartOf="@id/username"
         app:layout_constraintTop_toBottomOf="@id/username" />
 
+
     <EditText
         android:id="@+id/password"
         android:layout_width="wrap_content"
@@ -66,6 +72,7 @@
         android:hint="password"
         android:inputType="textPassword"
         android:textSize="16sp"
+
         app:layout_constraintStart_toStartOf="@id/password_label"
         app:layout_constraintTop_toBottomOf="@id/password_label" />
 
@@ -84,6 +91,7 @@
         app:layout_constraintStart_toStartOf="@id/password"
         app:layout_constraintTop_toBottomOf="@id/password" />
 
+
     <EditText
         android:id="@+id/password2"
         android:layout_width="wrap_content"
@@ -92,6 +100,7 @@
         android:hint="Enter your password again"
         android:inputType="textPassword"
         android:textSize="16sp"
+
         app:layout_constraintStart_toStartOf="@id/textView3"
         app:layout_constraintTop_toBottomOf="@id/textView3" />
 
@@ -101,19 +110,23 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
         android:fontFamily="@font/audiowide"
+
         android:text="Submit"
         app:layout_constraintEnd_toEndOf="@id/imageView2"
         app:layout_constraintStart_toStartOf="@id/imageView2"
         app:layout_constraintTop_toBottomOf="@id/password2" />
 
+
     <TextView
         android:id="@+id/textView5"
         android:layout_width="155dp"
         android:layout_height="20dp"
+
         android:layout_marginTop="32dp"
         android:text="\@The Gadget App Team"
         app:layout_constraintEnd_toEndOf="@id/login_button"
         app:layout_constraintStart_toStartOf="@id/login_button"
         app:layout_constraintTop_toBottomOf="@id/login_button" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
