@@ -3,7 +3,6 @@ package com.example.thegadgetapp.login;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +15,6 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
-import com.example.thegadgetapp.MainApplication;
 import com.example.thegadgetapp.R;
 import com.example.thegadgetapp.ViewModelFactory;
 import com.example.thegadgetapp.activity.MainActivity;
@@ -48,18 +46,26 @@ public class LoginFragment extends Fragment {
         ViewModelFactory factory = ((MainActivity) requireActivity()).getFactory();
         viewModel = new ViewModelProvider(this, factory).get(LoginViewModel.class);
 
-        loginBtn = view.findViewById(R.id.login_button);
-        loginBtn.setOnClickListener(v -> {
-            viewModel.tryLogin("yohai", "123", (isSuccess, user) -> {
-                if (isSuccess) {
-                    mainThread.post(() -> {
-                        ((MainActivity) requireActivity()).currUserId = user.id;
-                        Navigation.findNavController(v).navigate(
-                                LoginFragmentDirections.actionLoginFragmentToNewsFeedFragment(user.id)
-                        );
-                    });
-                }
+        String currUserId = viewModel.getCurrUserId();
+        if (currUserId != null) {
+            Navigation.findNavController(view).navigate(
+                    LoginFragmentDirections.actionLoginFragmentToNewsFeedFragment(currUserId)
+            );
+        } else {
+            loginBtn = view.findViewById(R.id.login_button);
+            loginBtn.setOnClickListener(v -> {
+                viewModel.tryLogin("yohai", "123", (isSuccess, user) -> {
+                    if (isSuccess) {
+                        mainThread.post(() -> {
+                            ((MainActivity) requireActivity()).currUserId = user.id;
+                            viewModel.setCurrLoginUser(user.id);
+                            Navigation.findNavController(v).navigate(
+                                    LoginFragmentDirections.actionLoginFragmentToNewsFeedFragment(user.id)
+                            );
+                        });
+                    }
+                });
             });
-        });
+        }
     }
 }
