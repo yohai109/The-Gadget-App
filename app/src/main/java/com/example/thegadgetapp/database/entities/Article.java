@@ -54,6 +54,8 @@ public class Article {
         this.imageUri = imageUri;
     }
 
+
+
     public static Map<String, Object> toMap(Article article) {
         HashMap<String, Object> map = new HashMap<>();
         map.put("_id", article.id);
