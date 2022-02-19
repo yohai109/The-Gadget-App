@@ -53,6 +53,7 @@ public class LoginFragment extends Fragment {
             viewModel.tryLogin("yohai", "123", (isSuccess, user) -> {
                 if (isSuccess) {
                     mainThread.post(() -> {
+                        ((MainActivity) requireActivity()).currUserId = user.id;
                         Navigation.findNavController(v).navigate(
                                 LoginFragmentDirections.actionLoginFragmentToNewsFeedFragment(user.id)
                         );

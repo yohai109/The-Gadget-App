@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.thegadgetapp.activity.ActivityViewModel;
+import com.example.thegadgetapp.createarticle.CreateArticleViewModel;
 import com.example.thegadgetapp.database.FirebaseRepository;
 import com.example.thegadgetapp.database.GadgetDatabase;
 import com.example.thegadgetapp.login.LoginViewModel;
@@ -29,6 +30,8 @@ public class ViewModelFactory implements ViewModelProvider.Factory {
             return (T) new ActivityViewModel(gadgetDatabase, firebaseRepository);
         } else if (modelClass.equals(NewsFeedViewModel.class)) {
             return (T) new NewsFeedViewModel(gadgetDatabase, firebaseRepository);
+        } else if (modelClass.equals(CreateArticleViewModel.class)) {
+            return (T) new CreateArticleViewModel(gadgetDatabase, firebaseRepository);
         }
         return null;
     }

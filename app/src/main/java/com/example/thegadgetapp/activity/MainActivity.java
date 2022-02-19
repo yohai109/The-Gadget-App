@@ -15,7 +15,8 @@ import com.example.thegadgetapp.R;
 import com.example.thegadgetapp.ViewModelFactory;
 
 public class MainActivity extends AppCompatActivity {
-    ActivityViewModel viewModel;
+    private ActivityViewModel viewModel;
+    public String currUserId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

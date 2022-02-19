@@ -7,13 +7,14 @@
     tools:context=".activity.MainActivity">
 
     <androidx.appcompat.widget.Toolbar
+        style="@style/Theme.AppCompat.DayNight.DarkActionBar"
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
         app:titleTextColor="?attr/colorOnPrimary"
         app:layout_constraintTop_toTopOf="parent"
-        android:theme="?attr/actionBarTheme"/>
+        />
 
 
     <androidx.fragment.app.FragmentContainerView
