@@ -21,4 +21,7 @@ public interface ArticleDao {
 
     @Query("SELECT * FROM Articles")
     LiveData<List<Article>> getAll();
+
+    @Query("SELECT * FROM Articles where id is :id")
+    LiveData<Article> getById(String id);
 }

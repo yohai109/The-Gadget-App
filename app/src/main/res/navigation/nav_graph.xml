@@ -18,13 +18,16 @@
         android:id="@+id/newsFeedFragment"
         android:name="com.example.thegadgetapp.newsfeed.NewsFeedFragment"
         android:label="fragment_news_feed"
-        tools:layout="@layout/fragment_news_feed" >
+        tools:layout="@layout/fragment_news_feed">
         <argument
-            app:argType="string"
-            android:name="userId" />
+            android:name="userId"
+            app:argType="string" />
         <action
             android:id="@+id/action_newsFeedFragment_to_createArticleFragment"
             app:destination="@id/createArticleFragment" />
+        <action
+            android:id="@+id/action_newsFeedFragment_to_articleDetailsFragment"
+            app:destination="@id/articleDetailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/createArticleFragment"
@@ -33,6 +36,15 @@
         tools:layout="@layout/fragment_create_article">
         <action
             android:id="@+id/action_createArticleFragment_to_newsFeedFragment"
-            app:popUpTo="@id/newsFeedFragment"/>
+            app:popUpTo="@id/newsFeedFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/articleDetailsFragment"
+        android:name="com.example.thegadgetapp.details.ArticleDetailsFragment"
+        android:label="fragment_article_details"
+        tools:layout="@layout/fragment_article_details">
+        <argument
+            android:name="articleId"
+            app:argType="string" />
     </fragment>
 </navigation>
