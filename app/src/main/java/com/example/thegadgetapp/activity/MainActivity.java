@@ -31,14 +31,16 @@ public class MainActivity extends AppCompatActivity {
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
         NavController navController = navHostFragment.getNavController();
 
-        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
+        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
+                R.id.loginFragment,
+                R.id.newsFeedFragment
+        ).build();
 
         NavigationUI.setupWithNavController(
                 toolbar,
                 navController,
                 appBarConfiguration
         );
-//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     public ViewModelFactory getFactory() {
