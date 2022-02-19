@@ -6,15 +6,13 @@ import androidx.room.Room;
 
 import com.example.thegadgetapp.database.FirebaseRepository;
 import com.example.thegadgetapp.database.GadgetDatabase;
-import com.example.thegadgetapp.database.entities.User;
-
-import java.util.UUID;
+import com.example.thegadgetapp.database.SharedPreferencesRepository;
 
 public class MainApplication extends Application {
     private GadgetDatabase db;
     private FirebaseRepository firebase;
     private ViewModelFactory factory;
-
+    private SharedPreferencesRepository sharedPreferencesRepository;
 
     @Override
     public void onCreate() {
@@ -27,7 +25,9 @@ public class MainApplication extends Application {
 
         firebase = FirebaseRepository.getINSTANCE();
 
-        factory = new ViewModelFactory(firebase, db);
+        sharedPreferencesRepository = new SharedPreferencesRepository(this);
+
+        factory = new ViewModelFactory(firebase, db, sharedPreferencesRepository);
     }
 
     public GadgetDatabase getDatabase() {
@@ -40,5 +40,9 @@ public class MainApplication extends Application {
 
     public ViewModelFactory getFactory() {
         return factory;
+    }
+
+    public SharedPreferencesRepository getSharedPreferencesRepository() {
+        return sharedPreferencesRepository;
     }
 }
