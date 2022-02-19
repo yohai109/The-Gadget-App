@@ -1,4 +1,4 @@
-package com.example.thegadgetapp.login;
+package com.example.thegadgetapp.registration;
 
 import android.os.Bundle;
 import android.os.Handler;

@@ -62,7 +62,7 @@ public class FirebaseRepository {
                 .get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-                        if(task.getResult().isEmpty()){
+                        if (task.getResult().isEmpty()) {
                             db.collection("Users").add(user);
                             callback.onComplete(true);
                         } else {
@@ -70,10 +70,31 @@ public class FirebaseRepository {
                         }
                     }
                 });
-//        db.collection("Users").add(user);
     }
 
-    public interface insertUserCallback{
+    public void getUser(String username, getUserCallback callback) {
+        db.collection("Users")
+                .whereEqualTo("username", username)
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        QuerySnapshot res = task.getResult();
+                        if (res == null || res.isEmpty()) {
+                            callback.onComplete(null);
+                        } else {
+                            for (DocumentSnapshot doc : res) {
+                                callback.onComplete(User.fromMap(doc));
+                            }
+                        }
+                    }
+                });
+    }
+
+    public interface getUserCallback {
+        void onComplete(User user);
+    }
+
+    public interface insertUserCallback {
         void onComplete(Boolean isSuccessful);
     }
 

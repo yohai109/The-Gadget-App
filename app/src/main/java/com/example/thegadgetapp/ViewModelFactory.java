@@ -11,7 +11,7 @@ import com.example.thegadgetapp.database.GadgetDatabase;
 import com.example.thegadgetapp.database.SharedPreferencesRepository;
 import com.example.thegadgetapp.details.DetailsViewModel;
 import com.example.thegadgetapp.login.LoginViewModel;
-import com.example.thegadgetapp.login.RegisterViewModel;
+import com.example.thegadgetapp.registration.RegisterViewModel;
 import com.example.thegadgetapp.newsfeed.NewsFeedViewModel;
 
 public class ViewModelFactory implements ViewModelProvider.Factory {
