@@ -34,7 +34,7 @@ public class EditArticleViewModel extends ViewModel {
             String secondaryHeader,
             String body,
             String imgUrl
-    ){
+    ) {
         executor.execute(() -> {
             localDB.articleDao().update(
                     new Article(articleId,
@@ -55,6 +55,22 @@ public class EditArticleViewModel extends ViewModel {
 
     public LiveData<Article> getArticle(String Id) {
         return localDB.articleDao().getById(Id);
+    }
+
+    public void deleteArticle(String id) {
+        executor.execute(() -> {
+            Article article = new Article(
+                    id,
+                    "",
+                    "",
+                    "",
+                    "",
+                    ""
+            );
+
+            remoteDB.deleteArticle(article);
+            localDB.articleDao().delete(article);
+        });
     }
 
     @Override
