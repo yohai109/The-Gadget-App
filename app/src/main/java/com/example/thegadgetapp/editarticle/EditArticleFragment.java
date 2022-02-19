@@ -40,6 +40,8 @@ public class EditArticleFragment extends Fragment {
     private Button saveButton;
     private ImageView imagePreview;
     private ProgressBar loadingView;
+    private FloatingActionButton fab;
+    private Button deleteButton;
 
     private String articleId;
 
@@ -85,6 +87,10 @@ public class EditArticleFragment extends Fragment {
 
             startActivityForResult(Intent.createChooser(i, "Select Picture"), SELECT_PICTURE);
         });
+
+        deleteButton.setOnClickListener(v -> {
+            viewModel.deleteArticle(articleId);
+        });
     }
 
     @Override
@@ -127,6 +133,7 @@ public class EditArticleFragment extends Fragment {
         secondaryHeaderEditTextView = view.findViewById(R.id.secondary_header_edittext);
         bodyEditTextView = view.findViewById(R.id.body_edittext);
         saveButton = view.findViewById(R.id.save_button);
+        deleteButton = view.findViewById(R.id.delete_button);
         imagePreview = view.findViewById(R.id.image_preview);
     }
 
