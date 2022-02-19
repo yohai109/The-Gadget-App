@@ -1,12 +1,12 @@
 package com.example.thegadgetapp.activity;
 
 import android.os.Bundle;
+import android.view.Menu;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
@@ -58,13 +58,19 @@ public class MainActivity extends AppCompatActivity {
                 appBarConfiguration
         );
 
-        setLogoutClickListener(navController);
+        setMenuItemsClickListener(navController);
     }
 
-    private void setLogoutClickListener(NavController navController){
-        toolbar.getMenu().findItem(R.id.logout).setOnMenuItemClickListener(item -> {
+    private void setMenuItemsClickListener(NavController navController) {
+        Menu menu = toolbar.getMenu();
+        menu.findItem(R.id.logout).setOnMenuItemClickListener(item -> {
             viewModel.logout();
             navController.navigate(R.id.action_global_loginFragment);
+            return true;
+        });
+
+        menu.findItem(R.id.profile).setOnMenuItemClickListener(item -> {
+            navController.navigate(R.id.action_global_ProfileFragment);
             return true;
         });
     }
@@ -76,7 +82,9 @@ public class MainActivity extends AppCompatActivity {
     public void toggleLogoutButton(Boolean shouldShow) {
         if (shouldShow != isLogoutBtnShown) {
             isLogoutBtnShown = shouldShow;
-            toolbar.getMenu().findItem(R.id.logout).setVisible(isLogoutBtnShown);
+            Menu menu = toolbar.getMenu();
+            menu.findItem(R.id.logout).setVisible(isLogoutBtnShown);
+            menu.findItem(R.id.profile).setVisible(isLogoutBtnShown);
             toolbar.invalidateMenu();
         }
     }
