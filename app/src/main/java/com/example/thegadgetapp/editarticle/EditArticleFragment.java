@@ -56,7 +56,7 @@ public class EditArticleFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_create_article, container, false);
+        return inflater.inflate(R.layout.fragment_edit_article, container, false);
     }
 
     @Override
@@ -133,9 +133,8 @@ public class EditArticleFragment extends Fragment {
         secondaryHeaderEditTextView = view.findViewById(R.id.secondary_header_edittext);
         bodyEditTextView = view.findViewById(R.id.body_edittext);
         saveButton = view.findViewById(R.id.save_button);
-        imagePreview = view.findViewById(R.id.image_imageview);
-        fab = view.findViewById(R.id.edit_article_fab);
         deleteButton = view.findViewById(R.id.delete_button);
+        imagePreview = view.findViewById(R.id.image_preview);
     }
 
     private void setSaveClick() {
