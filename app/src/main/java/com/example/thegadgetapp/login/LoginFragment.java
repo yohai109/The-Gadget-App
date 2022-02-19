@@ -4,12 +4,11 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -23,10 +22,12 @@ import com.example.thegadgetapp.ViewModelFactory;
 import com.example.thegadgetapp.activity.MainActivity;
 
 public class LoginFragment extends Fragment {
-    LoginViewModel viewModel;
-    Button loginBtn;
-    Button registerBtn;
-    Handler mainThread = HandlerCompat.createAsync(Looper.getMainLooper());
+    private LoginViewModel viewModel;
+    private Button loginBtn;
+    private Button registerBtn;
+    private Handler mainThread = HandlerCompat.createAsync(Looper.getMainLooper());
+    private EditText usernameEditText;
+    private EditText passwordEditText;
 
     public LoginFragment() {
         // Required empty public constructor
@@ -58,21 +59,29 @@ public class LoginFragment extends Fragment {
                     LoginFragmentDirections.actionLoginFragmentToNewsFeedFragment(currUserId)
             );
         } else {
-            loginBtn = view.findViewById(R.id.login_button);
-            registerBtn = view.findViewById(R.id.register_button);
+            initViews(view);
+
             loginBtn.setOnClickListener(v -> {
-                viewModel.tryLogin("yohai", "123", (isSuccess, user) -> {
-                    if (isSuccess) {
+                String username = usernameEditText.getText().toString();
+                String password = passwordEditText.getText().toString();
+
+                if (username.equals("") || password.equals("")) {
+                    Toast.makeText(getContext(), "please enter username and password", Toast.LENGTH_LONG).show();
+                } else {
+                    viewModel.tryLogin(username, password, (isSuccess, user) -> {
                         mainThread.post(() -> {
-                            ((MainActivity) requireActivity()).currUserId = user.id;
-                            viewModel.setCurrLoginUser(user.id);
-                            Navigation.findNavController(v).navigate(
-                                    LoginFragmentDirections.actionLoginFragmentToNewsFeedFragment(user.id)
-                            );
+                            if (isSuccess) {
+                                ((MainActivity) requireActivity()).currUserId = user.id;
+                                viewModel.setCurrLoginUser(user.id);
+                                Navigation.findNavController(v).navigate(
+                                        LoginFragmentDirections.actionLoginFragmentToNewsFeedFragment(user.id)
+                                );
+                            }
                         });
-                    }
-                });
+                    });
+                }
             });
+
             registerBtn.setOnClickListener(v -> {
                 Navigation.findNavController(v).navigate(
                         LoginFragmentDirections.actionLoginFragmentToRegisterFragment()
@@ -82,7 +91,14 @@ public class LoginFragment extends Fragment {
         }
     }
 
-    private void hideLogoutButton(){
+    private void initViews(@NonNull View view) {
+        loginBtn = view.findViewById(R.id.login_button);
+        registerBtn = view.findViewById(R.id.register_button);
+        usernameEditText = view.findViewById(R.id.username);
+        passwordEditText = view.findViewById(R.id.password);
+    }
+
+    private void hideLogoutButton() {
         ((MainActivity) requireActivity()).toggleLogoutButton(false);
     }
 }

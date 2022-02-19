@@ -1,4 +1,4 @@
-package com.example.thegadgetapp.login;
+package com.example.thegadgetapp.registration;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -8,6 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -30,7 +32,9 @@ public class RegisterFragment extends Fragment {
     Button submitBtn;
     EditText username;
     EditText password;
+    EditText name;
     Handler mainThread = HandlerCompat.createAsync(Looper.getMainLooper());
+    private TextView secondPassword;
 
     public RegisterFragment() {
         // Required empty public constructor
@@ -55,19 +59,44 @@ public class RegisterFragment extends Fragment {
         ViewModelFactory factory = ((MainActivity) requireActivity()).getFactory();
         viewModel = new ViewModelProvider(this, factory).get(RegisterViewModel.class);
 
+        initViews(view);
+
+        submitBtn.setOnClickListener(v -> {
+            User user = new User(
+                    id,
+                    username.getText().toString(),
+                    password.getText().toString(),
+                    "",
+                    name.getText().toString()
+            );
+            if (user.username.equals("") || user.password.equals("")) {
+                Toast.makeText(getContext(), "please enter username and password", Toast.LENGTH_LONG).show();
+            } else if (!user.password.equals(secondPassword.getText().toString())) {
+                Toast.makeText(getContext(), "password do not match", Toast.LENGTH_LONG).show();
+            } else {
+                viewModel.insertUserRemote(user, isSuccessful -> {
+                    if (isSuccessful) {
+                        viewModel.insertUserLocal(user, isSuccessful2 -> {
+                            Toast.makeText(getContext(), "registration successful", Toast.LENGTH_LONG).show();
+                            Navigation.findNavController(view).navigateUp();
+                        });
+                    } else {
+                        mainThread.post(() -> {
+                            Toast.makeText(getContext(), "username already taken", Toast.LENGTH_LONG).show();
+                        });
+                    }
+                });
+            }
+        });
+    }
+
+    private void initViews(@NonNull View view) {
         id = UUID.randomUUID().toString();
         username = view.findViewById(R.id.username);
         password = view.findViewById(R.id.password);
         submitBtn = view.findViewById(R.id.submit_register_button);
-
-        submitBtn.setOnClickListener(v -> {
-            User user =new User(
-                    id,
-                    username.getText().toString(),
-                    password.getText().toString());
-            viewModel.insert(user);
-
-            });
+        secondPassword = view.findViewById(R.id.password2);
+        name = view.findViewById(R.id.name);
     }
 
 
