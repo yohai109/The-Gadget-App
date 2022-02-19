@@ -58,7 +58,7 @@ public class RegisterFragment extends Fragment {
         id = UUID.randomUUID().toString();
         username = view.findViewById(R.id.username);
         password = view.findViewById(R.id.password);
-        submitBtn = view.findViewById(R.id.submit_button);
+        submitBtn = view.findViewById(R.id.submit_register_button);
 
         submitBtn.setOnClickListener(v -> {
             User user =new User(
